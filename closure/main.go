@@ -34,7 +34,8 @@ func main() {
 }
 
 func outer() func() {
-	money := 100
+	money := 100 // Go runtime does ESCAPE analysis and moves the money variable to
+	// 'heap memory' as this variable will be needed after the outer function returns.
 	age := 30
 
 	fmt.Println("Age:", age)
