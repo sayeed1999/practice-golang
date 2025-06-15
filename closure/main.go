@@ -12,11 +12,24 @@ import "fmt"
 // The closure function is returned from the outer function and can be called multiple times,
 // each time retaining the state of the variables it captured..
 
+// Stack memory vs Heap memory: -
+// Stack frame gets automatic cleanup, but heap needs Garbage Collector (GC) to cleanup..
+// Stack memory is fixed, but heap memory is dynamic, can increase over necessity.
+// That's why you see 'Stack Overflow' error!
+
 const a = 10 // compile time creation
 
 var p = 100 // runtime creation
 
-// go run main.go =>
+// Go runs init() before any function is invoked!!
+func init() {
+	fmt.Println("=== learning closure ===")
+}
+
+// Note: -
+// Once main func is finished executing, stack memory is totally cleaned up,
+// but we have no control over heap memory.
+// The GC might clean up immediately or much later after the main func is finished running!
 
 func main() {
 	showFn := outer()
@@ -33,6 +46,8 @@ func main() {
 	showFn2()          // prints 430
 }
 
+// Note: One
+
 func outer() func() {
 	money := 100 // Go runtime does ESCAPE analysis and moves the money variable to
 	// 'heap memory' as this variable will be needed after the outer function returns.
@@ -40,6 +55,8 @@ func outer() func() {
 
 	fmt.Println("Age:", age)
 
+	// Note 1: When showFn is initialized, Go runtime knows money will be needed later,
+	// so it does ESCAPE analysis & send it (money) to 'heap' memory.
 	showFn := func() {
 		money = money + a + p // using the variables from outer function & global scope
 		fmt.Println(money)
