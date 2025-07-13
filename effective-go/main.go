@@ -93,4 +93,10 @@ func main() {
 	fmt.Printf("Status Code: %v & Status Message: %v\n", code, message)
 	result, err := namedresultparams.Divide(10, 2)
 	fmt.Printf("Division Result: %v, Error: %v\n", result, err)
+
+	// defer executes in LIFO order, e.g.,
+	defer fmt.Println("Finished deferring...")
+	for i := 0; i < 5; i++ {
+		defer fmt.Printf("%d ", i)
+	}
 }
