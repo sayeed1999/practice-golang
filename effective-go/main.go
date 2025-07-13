@@ -1,6 +1,9 @@
 package main
 
-import "effective-go/ring"
+import (
+	"effective-go/ring"
+	"fmt"
+)
 
 type T struct {
 	Name  string // name of the object
@@ -36,5 +39,16 @@ func main() {
 	// once.DoOrWaitUntilDone(setup).
 	// Long names don't automatically make things more readable.
 	// A helpful doc comment can often be more valuable than an extra long name.
+
+	// ********* Getter and Setter Naming Conventions **********
+	// If you have a field called owner (lower case, unexported),
+	// the getter method should be called Owner (upper case, exported), not GetOwner.
+	// But SetOwner suits better for the setter method,
+	if success := newRing.SetOwner("lady"); success {
+		fmt.Println("Ring Owner:", newRing.Owner())
+	}
+
+	// Panic! Uncomment the below line to see a panic in action.
+	// newRing.SetOwner("") // how to resolve panic in go?
 
 }
