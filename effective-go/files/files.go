@@ -7,6 +7,11 @@ import (
 
 // Note: Always try to eliminate redundant else blocks.
 
+// ***** Notes on Defer ******
+// - Defer is used to ensure that a function call is performed later in a program's execution,
+// regardles of which path the execution takes within a functon especially when dealing with resources like files or network connections.
+// - And especially when the function has complex logic with multiple return points!!
+
 func ReadFile() string {
 	// ** Note: It is the file route from where the executable is! not where the package is! **
 	filename := "./files/txt.txt"
@@ -15,6 +20,7 @@ func ReadFile() string {
 	if err != nil {
 		return "Error opening file: " + err.Error()
 	}
+	defer f.Close() // Ensure the file is closed after reading
 
 	d, err := f.Stat()
 	if err != nil {
