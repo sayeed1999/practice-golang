@@ -1,6 +1,7 @@
 package main
 
 import (
+	"effective-go/files"
 	"effective-go/ring"
 	"fmt"
 )
@@ -40,6 +41,10 @@ func main() {
 	// Long names don't automatically make things more readable.
 	// A helpful doc comment can often be more valuable than an extra long name.
 
+	// Mixed Caps!
+	// Finally, the convention in Go is to use MixedCaps or mixedCaps rather than underscores to write multiword names.
+	// e.g DoOnce instead of do_once.
+
 	// ********* Getter and Setter Naming Conventions **********
 	// If you have a field called owner (lower case, unexported),
 	// the getter method should be called Owner (upper case, exported), not GetOwner.
@@ -51,4 +56,7 @@ func main() {
 	// Panic! Uncomment the below line to see a panic in action.
 	// newRing.SetOwner("") // how to resolve panic in go?
 
+	fileInfo := files.ReadFile()
+	fmt.Println()
+	fmt.Println(fileInfo)
 }
