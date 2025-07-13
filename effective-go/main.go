@@ -59,4 +59,14 @@ func main() {
 	fileInfo := files.ReadFile()
 	fmt.Println()
 	fmt.Println(fileInfo)
+
+	// ******** Reverse array 'a' **********
+	// Go has no comma operator and ++ and -- are statements not expressions.
+	// Thus if you want to run multiple variables in a for you should use parallel assignment
+	// (although that precludes ++ and --).
+	a := []string{"H", "e", "l", "l", "o", ",", "W", "o", "r", "l", "d", "!"}
+	for i, j := 0, len(a)-1; i < j; i, j = i+1, j-1 {
+		a[i], a[j] = a[j], a[i]
+	}
+	fmt.Println("Reversed Array:", a)
 }
