@@ -71,6 +71,7 @@ func main() {
 	fmt.Println("Reversed Array:", a)
 
 	// ************ Type Switch ************
+	var t interface{}
 	t = func() string { return "Hello, World!" }()
 
 	switch t := t.(type) {
@@ -87,5 +88,3 @@ func main() {
 	}
 
 }
-
-var t interface{}
