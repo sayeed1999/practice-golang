@@ -30,4 +30,11 @@ func main() {
 
 	newRing := ring.New(5) // Using the ring package's constructor
 	println("Created a ring of size:", newRing.Size)
+
+	// Another short example is once.Do;
+	// once.Do(setup) reads well and would not be improved by writing
+	// once.DoOrWaitUntilDone(setup).
+	// Long names don't automatically make things more readable.
+	// A helpful doc comment can often be more valuable than an extra long name.
+
 }
