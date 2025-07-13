@@ -85,6 +85,7 @@ func main() {
 	default:
 		fmt.Println("Unknown type:", t)
 	}
+
 }
 
 var t interface{}
