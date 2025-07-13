@@ -69,4 +69,22 @@ func main() {
 		a[i], a[j] = a[j], a[i]
 	}
 	fmt.Println("Reversed Array:", a)
+
+	// ************ Type Switch ************
+	t = func() string { return "Hello, World!" }()
+
+	switch t := t.(type) {
+	case int:
+		fmt.Println("Type is int:", t)
+	case string:
+		fmt.Println("Type is string:", t)
+	case *int:
+		fmt.Println("Type is *int:", t)
+	case *string:
+		fmt.Println("Type is *string:", t)
+	default:
+		fmt.Println("Unknown type:", t)
+	}
 }
+
+var t interface{}
