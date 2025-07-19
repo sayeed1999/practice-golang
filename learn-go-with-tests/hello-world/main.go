@@ -10,6 +10,10 @@ const (
 	frenchHelloPrefix  = "Bonjour, "
 )
 
+func main() {
+	fmt.Println(Hello())
+}
+
 func Hello() string {
 	return englishHelloPrefix + "World!"
 }
@@ -19,17 +23,18 @@ func HelloName(name string, language string) string {
 		name = "Sayeed"
 	}
 
-	if language == spanish {
-		return spanishHelloPrefix + name + "!"
-	}
-
-	if language == french {
-		return frenchHelloPrefix + name + "!"
-	}
-
-	return englishHelloPrefix + name + "!"
+	return greetingPrefix(language) + name + "!"
 }
 
-func main() {
-	fmt.Println(Hello())
+// By named return value, we make it more clear what the function returns.
+func greetingPrefix(language string) (prefix string) {
+	switch language {
+	case spanish:
+		prefix = spanishHelloPrefix
+	case french:
+		prefix = frenchHelloPrefix
+	default:
+		prefix = englishHelloPrefix
+	}
+	return
 }
