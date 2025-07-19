@@ -22,3 +22,22 @@ func TestHelloName(t *testing.T) {
 		t.Errorf("got '%s', want '%s'", got, want)
 	}
 }
+
+func TestHelloNameProperly(t *testing.T) {
+	t.Run("saying hello when name is empty", func(t *testing.T) {
+		got := HelloName("")
+		want := "Hello, Sayeed!"
+
+		if got != want {
+			t.Errorf("got '%s', want '%s'", got, want)
+		}
+	})
+	t.Run("saying hello to people", func(t *testing.T) {
+		got := HelloName("Sifat")
+		want := "Hello, Hamim!"
+
+		if got != want {
+			t.Errorf("got '%s', want '%s'", got, want)
+		}
+	})
+}
