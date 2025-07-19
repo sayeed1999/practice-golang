@@ -20,6 +20,29 @@ func TestArea(t *testing.T) {
 	})
 }
 
+// Table Driven Tests!!!
+// - Run a series of testcases on a series of expected values !!!
+func TestAreaTableDriven(t *testing.T) {
+
+	areaTests := []struct {
+		shape Shape
+		want  int
+	}{
+		{&Rectangle{3, 4}, 12},
+		{&Circle{10}, 314},
+		{&Triangle{12, 6}, 36},
+	}
+
+	for _, tt := range areaTests {
+		got := tt.shape.Area()
+		want := tt.want
+
+		if got != want {
+			t.Errorf("got %v, want %v", got, want)
+		}
+	}
+}
+
 func checkArea(t testing.TB, shape Shape, want int) {
 	t.Helper()
 	area := shape.Area()
