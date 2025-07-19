@@ -1,6 +1,9 @@
 package main
 
-import "testing"
+import (
+	"fmt"
+	"testing"
+)
 
 // Note: If you try to run the test without creating a go module, you get an error.
 // Error: go: cannot find main module, ...
@@ -25,20 +28,20 @@ func TestHelloName(t *testing.T) {
 
 	t.Run("saying hello to people", func(t *testing.T) {
 		got := HelloName("Sifat", "")
-		want := "Hello, Sifat!"
+		want := fmt.Sprintf("%s, Sifat!", englishHelloPrefix)
 
 		assertCorrectMessage(t, got, want)
 	})
 
 	t.Run("in Spanish", func(t *testing.T) {
 		got := HelloName("Hamim", spanish)
-		want := "Hola, Hamim!"
+		want := fmt.Sprintf("%s, Hamim!", spanishHelloPrefix)
 		assertCorrectMessage(t, got, want)
 	})
 
 	t.Run("in French", func(t *testing.T) {
-		got := HelloName("Robius Sany", "French")
-		want := "Bonjour, Robius Sany!"
+		got := HelloName("Robius Sany", french)
+		want := fmt.Sprintf("%s, Robius Sany!", frenchHelloPrefix)
 		assertCorrectMessage(t, got, want)
 	})
 }

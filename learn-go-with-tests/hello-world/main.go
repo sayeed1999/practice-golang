@@ -5,9 +5,9 @@ import "fmt"
 const (
 	spanish            = "Spanish"
 	french             = "French"
-	englishHelloPrefix = "Hello, "
-	spanishHelloPrefix = "Hola, "
-	frenchHelloPrefix  = "Bonjour, "
+	englishHelloPrefix = "Hello"
+	spanishHelloPrefix = "Hola"
+	frenchHelloPrefix  = "Bonjour"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 }
 
 func Hello() string {
-	return englishHelloPrefix + "World!"
+	return englishHelloPrefix + ", World!"
 }
 
 func HelloName(name string, language string) string {
@@ -23,7 +23,7 @@ func HelloName(name string, language string) string {
 		name = "Sayeed"
 	}
 
-	return greetingPrefix(language) + name + "!"
+	return fmt.Sprintf("%s, %s!", greetingPrefix(language), name)
 }
 
 // By named return value, we make it more clear what the function returns.
