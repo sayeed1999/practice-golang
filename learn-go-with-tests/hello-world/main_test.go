@@ -15,23 +15,30 @@ func TestHello(t *testing.T) {
 }
 
 func TestHelloName(t *testing.T) {
-	got := HelloName("Mucktadir Sayem")
-	want := "Hello, Mucktadir Sayem!"
 
-	assertCorrectMessage(t, got, want)
-}
-
-func TestHelloNameProperly(t *testing.T) {
 	t.Run("saying hello when name is empty", func(t *testing.T) {
-		got := HelloName("")
+		got := HelloName("", "")
 		want := "Hello, Sayeed!"
 
 		assertCorrectMessage(t, got, want)
 	})
-	t.Run("saying hello to people", func(t *testing.T) {
-		got := HelloName("Sifat")
-		want := "Hello, Hamim!"
 
+	t.Run("saying hello to people", func(t *testing.T) {
+		got := HelloName("Sifat", "")
+		want := "Hello, Sifat!"
+
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("in Spanish", func(t *testing.T) {
+		got := HelloName("Hamim", spanish)
+		want := "Hola, Hamim!"
+		assertCorrectMessage(t, got, want)
+	})
+
+	t.Run("in French", func(t *testing.T) {
+		got := HelloName("Robius Sany", "French")
+		want := "Bonjour, Robius Sany!"
 		assertCorrectMessage(t, got, want)
 	})
 }
