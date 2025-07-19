@@ -4,6 +4,16 @@ Reference to the online book: <https://quii.gitbook.io/learn-go-with-tests>
 
 To run tests from any module, navigate inside that module root dir and run `go test ./...`
 
+To run tests with coverage,
+
+```bash
+go test -cover
+
+Output:
+PASS
+coverage: 100.0% of statements
+```
+
 To run benchmarks, run
 
 ```bash
