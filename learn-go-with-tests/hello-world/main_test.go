@@ -18,9 +18,7 @@ func TestHelloName(t *testing.T) {
 	got := HelloName("Mucktadir Sayem")
 	want := "Hello, Mucktadir Sayem!"
 
-	if got != want {
-		t.Errorf("got '%s', want '%s'", got, want)
-	}
+	assertCorrectMessage(t, got, want)
 }
 
 func TestHelloNameProperly(t *testing.T) {
@@ -28,16 +26,20 @@ func TestHelloNameProperly(t *testing.T) {
 		got := HelloName("")
 		want := "Hello, Sayeed!"
 
-		if got != want {
-			t.Errorf("got '%s', want '%s'", got, want)
-		}
+		assertCorrectMessage(t, got, want)
 	})
 	t.Run("saying hello to people", func(t *testing.T) {
 		got := HelloName("Sifat")
 		want := "Hello, Hamim!"
 
-		if got != want {
-			t.Errorf("got '%s', want '%s'", got, want)
-		}
+		assertCorrectMessage(t, got, want)
 	})
+}
+
+// Helper function to avoid code duplication in tests.
+func assertCorrectMessage(t *testing.T, got, want string) {
+	t.Helper() // This tells Go that this function is a helper function for tests.
+	if got != want {
+		t.Errorf("got '%s', want '%s'", got, want)
+	}
 }
