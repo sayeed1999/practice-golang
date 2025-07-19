@@ -33,6 +33,16 @@ func TestSumAll(t *testing.T) {
 	}
 }
 
+// Alert:- This shouldn't have compiled, but reflect.DeepEqual() doesn't check types, only checks both are comparable or not!
+func TestSumAllBuggy(t *testing.T) {
+	got := SumAll([]int{1, 2}, []int{0, 6}, []int{3, 4, 5})
+	want := "Alice & Bob!"
+
+	if !reflect.DeepEqual(got, want) { // got != want {
+		t.Errorf("got '%v', want '%v'", got, want)
+	}
+}
+
 func assertCorrectMessage(t testing.TB, got, want int) {
 	t.Helper()
 	if got != want {
