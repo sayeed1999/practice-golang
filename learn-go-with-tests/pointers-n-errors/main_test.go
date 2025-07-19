@@ -5,20 +5,23 @@ import "testing"
 func TestWallet(t *testing.T) {
 	t.Run("deposit", func(t *testing.T) {
 		wallet := Wallet{}
-
 		wallet.Deposit(Bitcoin(10))
-		want := Bitcoin(10)
-
-		assertBalance(t, wallet, want)
+		assertBalance(t, wallet, Bitcoin(10))
 	})
 
 	t.Run("withdraw", func(t *testing.T) {
 		wallet := Wallet{balance: Bitcoin(30)}
-
 		wallet.Withdraw(Bitcoin(20))
-		want := Bitcoin(10)
+		assertBalance(t, wallet, Bitcoin(10))
+	})
 
-		assertBalance(t, wallet, want)
+	t.Run("withdraw insufficient funds", func(t *testing.T) {
+		wallet := Wallet{balance: Bitcoin(20)}
+		err := wallet.Withdraw(Bitcoin(30))
+
+		if err == nil {
+			t.Errorf("expected an error for insufficient funds, got none")
+		}
 	})
 }
 
