@@ -37,7 +37,14 @@ func TestHelloNameProperly(t *testing.T) {
 }
 
 // Helper function to avoid code duplication in tests.
-func assertCorrectMessage(t *testing.T, got, want string) {
+// For helper functions, it's a good idea to accept a testing.TB which is an interface
+// that *testing.T and *testing.B both satisfy.
+
+// t.Helper() is needed to tell the test suite that this method is a helper. By doing this,
+// when it fails, the line number reported will be in our function call rather than inside
+// our test helper. This will help other developers track down problems more easily.
+func assertCorrectMessage(t testing.TB, got, want string) {
+	// ** comment this t.Helper() out to see why it's important for failing tests! **
 	t.Helper() // This tells Go that this function is a helper function for tests.
 	if got != want {
 		t.Errorf("got '%s', want '%s'", got, want)
