@@ -38,6 +38,38 @@ func TestSearch(t *testing.T) {
 	})
 }
 
+func TestAdd(t *testing.T) {
+	t.Run("unknown word", func(t *testing.T) {
+		dictonary := make(Dictionary)
+		word := "test"
+		definition := "this is a test"
+		dictonary.Add(word, definition)
+
+		got, _ := dictonary.Search(word)
+
+		assertStrings(t, got, definition)
+	})
+
+	t.Run("known word", func(t *testing.T) {
+		dictonary := make(Dictionary)
+		word := "test"
+		definition := "this is a test"
+		err := dictonary.Add(word, definition)
+
+		if err != nil {
+			t.Fatalf("cannot throw exception")
+		}
+
+		err = dictonary.Add(word, definition) // re-adding what's already present!
+
+		if err == nil {
+			t.Fatalf("expected an error")
+		}
+
+		assertStrings(t, err.Error(), ErrAlreadyPresent.Error())
+	})
+}
+
 func assertStrings(t testing.TB, got, want string) {
 	t.Helper()
 
