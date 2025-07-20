@@ -27,4 +27,6 @@ cpu: VirtualApple @ 2.50GHz
 BenchmarkRepeat-8        8506176               139.1 ns/op
 PASS
 ok      iteration       2.017s
-```
+```'
+
+To detect race condition, use `go test -race`.
