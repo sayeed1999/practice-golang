@@ -20,12 +20,12 @@ func CheckWebsites(wc WebsiteChecker, urls []string) map[string]bool {
 	for _, url := range urls {
 		go func() { // this pulls up a separate go-routine
 			ok := wc(url)
-			resultChannel <- result{url, ok}
+			resultChannel <- result{url, ok} // send the result struct to the channel
 		}()
 	}
 
 	for i := 0; i < len(urls); i++ {
-		r := <-resultChannel
+		r := <-resultChannel // receive the result struct from the channel
 		results[r.string] = r.bool
 	}
 
