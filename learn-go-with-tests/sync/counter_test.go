@@ -11,7 +11,7 @@ func TestCounter(t *testing.T) {
 		counter.Inc()
 		counter.Inc()
 		counter.Inc()
-		assertCounter(t, counter, 3)
+		assertCounter(t, &counter, 3)
 	})
 
 	t.Run("it runs safely concurrently", func(t *testing.T) {
@@ -31,11 +31,15 @@ func TestCounter(t *testing.T) {
 		wg.Wait() // waits until all 1000 goroutines are released,
 		// this helps to not do assertion until all pending operations are finished!
 
-		assertCounter(t, counter, wantedCount)
+		assertCounter(t, &counter, wantedCount)
 	})
 }
 
-func assertCounter(t testing.TB, counter Counter, want int) {
+// Note: - when counter holds a mutex, it must not be copied e.g passed by value,
+// so passing it by reference.
+// Else `go vet` gives vulnerability check `call of assertCounter copies lock value go-sync.Counter`
+
+func assertCounter(t testing.TB, counter *Counter, want int) {
 	if counter.Value() != want {
 		t.Errorf("got %d, want %d", counter.Value(), want)
 	}

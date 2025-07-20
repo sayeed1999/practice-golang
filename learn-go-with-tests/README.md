@@ -30,3 +30,14 @@ ok      iteration       2.017s
 ```'
 
 To detect race condition, use `go test -race`.
+
+To do vulnerability check, use this
+
+```bash
+go vet
+
+Sample Output (if there is vulnerabilty):
+./counter_test.go:14:20: call of assertCounter copies lock value: go-sync.Counter
+./counter_test.go:34:20: call of assertCounter copies lock value: go-sync.Counter
+./counter_test.go:38:42: assertCounter passes lock by value: go-sync.Counter
+```
