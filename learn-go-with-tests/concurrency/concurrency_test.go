@@ -3,9 +3,11 @@ package concurrency
 import (
 	"reflect"
 	"testing"
+	"time"
 )
 
 func mockWebsiteChecker(url string) bool {
+	time.Sleep(2 * time.Second)
 	return url != "waat://malware.geds"
 }
 
