@@ -16,10 +16,11 @@ func main() {
 }
 
 func CountDown(out io.Writer, sleeper sleeper.Sleeper) { // bytes.Buffer implements io.Writer,
-	for i := countDownStart; i >= 1; i-- {
-		fmt.Fprintln(out, i)
-		// time.Sleep(1 * time.Second)
+	for i := countDownStart; i > 0; i-- {
 		sleeper.Sleep()
 	}
-	fmt.Fprint(out, finalWord) // Fprintf vs Fprint ??
+
+	for i := countDownStart; i > 0; i-- {
+		fmt.Fprintln(out, i)
+	}
 }
