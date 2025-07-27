@@ -1,18 +1,22 @@
 package main
 
+import "strings"
+
 func ConvertToRomain(num int) string {
-	switch num {
-	case 5:
-		return "V"
-	case 4:
-		return "IV"
-	case 3:
-		return "III"
-	case 2:
-		return "II"
-	case 1:
-		return "I"
+	var result strings.Builder
+
+	for num > 0 {
+		if num >= 5 {
+			result.WriteString("V")
+			num -= 5
+		} else if num >= 4 {
+			result.WriteString("IV")
+			num -= 4
+		} else {
+			result.WriteString("I")
+			num--
+		}
 	}
 
-	return ""
+	return result.String()
 }
