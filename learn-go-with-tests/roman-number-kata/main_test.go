@@ -30,6 +30,10 @@ func TestConvertToRoman(t *testing.T) {
 		{"18 gets converted to XVIII", 18, "XVIII"},
 		{"19 gets converted to XIX", 19, "XIX"},
 		{"39 gets converted to XXXIX", 39, "XXXIX"},
+		// edge cases surrounding 50 starts here..
+		{"50 gets converted to L", 50, "L"},
+		{"40 gets converted to XL", 40, "XL"},
+		{"49 gets converted to XLIX", 49, "XLIX"},
 	}
 
 	for _, testcase := range testcases {

@@ -6,7 +6,13 @@ func ConvertToRomain(num int) string {
 	var result strings.Builder
 
 	for num > 0 {
-		if num >= 10 {
+		if num >= 50 {
+			result.WriteString("L")
+			num -= 50
+		} else if num >= 40 {
+			result.WriteString("XL")
+			num -= 40
+		} else if num >= 10 {
 			result.WriteString("X")
 			num -= 10
 		} else if num >= 9 {
