@@ -3,24 +3,27 @@ package main
 import "testing"
 
 func TestConvertToRoman(t *testing.T) {
-	t.Run("1 should return I", func(t *testing.T) {
-		got := ConvertToRomain(1)
-		want := "I"
-		assertString(t, got, want)
-	})
 
-	t.Run("2 should return II", func(t *testing.T) {
-		got := ConvertToRomain(2)
-		want := "II"
-		assertString(t, got, want)
-	})
+	// table-based tests
+	testcases := []struct {
+		Description    string
+		Input          int
+		ExpectedOutput string
+	}{
+		{"1 gets converted to I", 1, "I"},
+		{"1 gets converted to II", 2, "II"},
+		{"1 gets converted to III", 3, "III"},
+		{"1 gets converted to IV", 4, "IV"},
+		{"1 gets converted to V", 5, "V"},
+	}
 
-	t.Run("3 should return III", func(t *testing.T) {
-		got := ConvertToRomain(3)
-		want := "III"
-		assertString(t, got, want)
-	})
-
+	for _, testcase := range testcases {
+		t.Run(testcase.Description, func(t *testing.T) {
+			got := ConvertToRomain(testcase.Input)
+			want := testcase.ExpectedOutput
+			assertString(t, got, want)
+		})
+	}
 }
 
 func assertString(t testing.TB, got, want string) {
