@@ -2,6 +2,12 @@ package main
 
 import "testing"
 
+// C - 100
+// L - 50
+// X - 10
+// V - 5
+// I - 1
+
 func TestConvertToRoman(t *testing.T) {
 
 	// table-based tests
@@ -20,6 +26,10 @@ func TestConvertToRoman(t *testing.T) {
 		{"8 gets converted to VIII", 8, "VIII"},
 		{"9 gets converted to IX", 9, "IX"},
 		{"10 gets converted to X", 10, "X"},
+		{"13 gets converted to XIII", 13, "XIII"},
+		{"18 gets converted to XVIII", 18, "XVIII"},
+		{"19 gets converted to XIX", 19, "XIX"},
+		{"39 gets converted to XXXIX", 39, "XXXIX"},
 	}
 
 	for _, testcase := range testcases {
