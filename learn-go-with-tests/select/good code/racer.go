@@ -12,15 +12,22 @@ import (
 
 // This time we don't wait for both GET to complete, rather choose winner who reaches first without calculating time!
 
+var tenSecondTimeout = 10 * time.Second
+
+// SO OUR MAIN CODE DOESN'T CARE ABOUT CONFIGURING, BUT ONLY TESTS DO..
 func Racer(url1, url2 string) (winner string, err error) {
+	return ConfigurableRacer(url1, url2, tenSecondTimeout)
+}
+
+func ConfigurableRacer(url1, url2 string, timeout time.Duration) (winner string, err error) {
 
 	select {
 	case <-ping(url1):
 		return url1, nil
 	case <-ping(url2):
 		return url2, nil
-	case <-time.After(9 * time.Second):
-		return "", fmt.Errorf("operation timed out: 10s")
+	case <-time.After(timeout):
+		return "", fmt.Errorf("operation timed out: %v", tenSecondTimeout)
 	}
 }
 
