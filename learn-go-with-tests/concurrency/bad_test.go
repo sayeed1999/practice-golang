@@ -4,9 +4,11 @@ import (
 	"concurrency"
 	"reflect"
 	"testing"
+	"time"
 )
 
 func mockWebsiteChecker(url string) bool {
+	time.Sleep(20 * time.Millisecond)
 	return url != "waat://furhurterwe.geds"
 }
 
@@ -27,5 +29,17 @@ func TestWebsiteChecker(t *testing.T) {
 
 	if !reflect.DeepEqual(want, got) {
 		t.Fatalf("want: %v, got: %v", want, got)
+	}
+}
+
+// Let's use a benchmark to test the speed of CheckWebsites so that we can see the effect of our changes.
+func BenchmarkCheckWebsites(b *testing.B) {
+	urls := make([]string, 100)
+	for i := 0; i < len(urls); i++ {
+		urls[i] = "a dummy url"
+	}
+
+	for b.Loop() { // loop returns true as long as the benchmark should keep running
+		concurrency.CheckWebsites(mockWebsiteChecker, urls)
 	}
 }
