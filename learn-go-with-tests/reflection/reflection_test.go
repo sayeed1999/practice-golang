@@ -68,7 +68,6 @@ func TestWalk_SeriesOfTests(t *testing.T) {
 			},
 			[]string{"Chris", "London"},
 		},
-		// from here pointer starts..
 		{
 			"pointers to fields",
 			&Person{
@@ -76,6 +75,20 @@ func TestWalk_SeriesOfTests(t *testing.T) {
 				Profile{"London", 26},
 			},
 			[]string{"Chris", "London"},
+		},
+		{
+			"working with slices",
+			[]Person{
+				{
+					"Chris",
+					Profile{"London", 26},
+				},
+				{
+					"Gayle",
+					Profile{"Zimbabue", 26},
+				},
+			},
+			[]string{"Chris", "London", "Gayle", "Zimbabue"},
 		},
 	}
 

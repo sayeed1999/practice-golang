@@ -10,14 +10,22 @@ import "reflect"
 func Walk(x interface{}, fn func(string)) {
 	val := getValue(x)
 
+	// for slices, NumField() panics!
+	if val.Kind() == reflect.Slice {
+		for i := 0; i < val.Len(); i++ {
+			Walk(val.Index(i).Interface(), fn) // VVI: must parse the field as an interface{} here!
+		}
+		return
+	}
+
 	for i := 0; i < val.NumField(); i++ {
 		field := val.Field(i)
 
 		switch field.Kind() {
-		case reflect.String:
-			fn(field.String()) // call the function if it is a string
 		case reflect.Struct: // do recursion if the field itself is a struct !!
 			Walk(field.Interface(), fn) // VVI: must parse the field as an interface{} here!
+		case reflect.String:
+			fn(field.String()) // call the function if it is a string
 
 		}
 	}
