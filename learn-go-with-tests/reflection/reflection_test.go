@@ -90,6 +90,20 @@ func TestWalk_SeriesOfTests(t *testing.T) {
 			},
 			[]string{"Chris", "London", "Gayle", "Zimbabue"},
 		},
+		{
+			"arrays are not treated as slices in golang",
+			[2]Person{
+				{
+					"Chris",
+					Profile{"London", 26},
+				},
+				{
+					"Gayle",
+					Profile{"Zimbabue", 26},
+				},
+			},
+			[]string{"Chris", "London", "Gayle", "Zimbabue"},
+		},
 	}
 
 	for _, test := range tests {

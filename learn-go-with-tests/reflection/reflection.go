@@ -12,7 +12,7 @@ func Walk(x interface{}, fn func(string)) {
 
 	switch val.Kind() {
 	// if [], need to walk over indices and recurse
-	case reflect.Slice:
+	case reflect.Slice, reflect.Array:
 		for i := 0; i < val.Len(); i++ {
 			Walk(val.Index(i).Interface(), fn) // VVI: must parse the field as an interface
 		}
