@@ -40,12 +40,23 @@ func TestWalk_SeriesOfTests(t *testing.T) {
 			[]string{"Chris"},
 		},
 		{
-			"struct with two strig fields",
+			"struct with two string fields",
 			struct {
 				Name string
 				City string
 			}{
 				"Chris", "London",
+			},
+			[]string{"Chris", "London"},
+		},
+		{
+			"struct with a non-string field",
+			struct {
+				Name string
+				City string
+				Age  int
+			}{
+				"Chris", "London", 33,
 			},
 			[]string{"Chris", "London"},
 		},
