@@ -60,6 +60,14 @@ func TestWalk_SeriesOfTests(t *testing.T) {
 			},
 			[]string{"Chris", "London"},
 		},
+		{
+			"struct with nested fields",
+			Person{
+				"Chris",
+				Profile{"London", 26},
+			},
+			[]string{"Chris", "London"},
+		},
 	}
 
 	for _, test := range tests {
@@ -75,4 +83,14 @@ func TestWalk_SeriesOfTests(t *testing.T) {
 			}
 		})
 	}
+}
+
+type Person struct {
+	Name    string
+	Profile Profile
+}
+
+type Profile struct {
+	City string
+	Age  int
 }

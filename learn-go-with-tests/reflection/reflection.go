@@ -17,5 +17,10 @@ func Walk(x interface{}, fn func(string)) {
 		if field.Kind() == reflect.String {
 			fn(field.String())
 		}
+
+		// do recursion if the field itself is a struct !!
+		if field.Kind() == reflect.Struct {
+			Walk(field.Interface(), fn) // VVI: must parse the field as an interface{} here!
+		}
 	}
 }
