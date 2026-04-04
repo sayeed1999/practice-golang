@@ -10,6 +10,11 @@ import "reflect"
 func Walk(x interface{}, fn func(string)) {
 	val := reflect.ValueOf(x)
 
+	// first extract the value if val is pointing to a Ptr
+	if val.Kind() == reflect.Pointer {
+		val = val.Elem() // necessary
+	}
+
 	for i := 0; i < val.NumField(); i++ {
 		field := val.Field(i)
 

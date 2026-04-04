@@ -68,6 +68,15 @@ func TestWalk_SeriesOfTests(t *testing.T) {
 			},
 			[]string{"Chris", "London"},
 		},
+		// from here pointer starts..
+		{
+			"pointers to fields",
+			&Person{
+				"Chris",
+				Profile{"London", 26},
+			},
+			[]string{"Chris", "London"},
+		},
 	}
 
 	for _, test := range tests {
