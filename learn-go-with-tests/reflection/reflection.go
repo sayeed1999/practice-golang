@@ -8,6 +8,22 @@ import "reflect"
 
 // provided requirement: interface{} is a struct
 func Walk(x interface{}, fn func(string)) {
+	val := getValue(x)
+
+	for i := 0; i < val.NumField(); i++ {
+		field := val.Field(i)
+
+		switch field.Kind() {
+		case reflect.String:
+			fn(field.String()) // call the function if it is a string
+		case reflect.Struct: // do recursion if the field itself is a struct !!
+			Walk(field.Interface(), fn) // VVI: must parse the field as an interface{} here!
+
+		}
+	}
+}
+
+func getValue(x interface{}) reflect.Value {
 	val := reflect.ValueOf(x)
 
 	// first extract the value if val is pointing to a Ptr
@@ -15,17 +31,5 @@ func Walk(x interface{}, fn func(string)) {
 		val = val.Elem() // necessary
 	}
 
-	for i := 0; i < val.NumField(); i++ {
-		field := val.Field(i)
-
-		// checking if the field Kind is a string
-		if field.Kind() == reflect.String {
-			fn(field.String())
-		}
-
-		// do recursion if the field itself is a struct !!
-		if field.Kind() == reflect.Struct {
-			Walk(field.Interface(), fn) // VVI: must parse the field as an interface{} here!
-		}
-	}
+	return val
 }
